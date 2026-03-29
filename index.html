@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sane Staggering Beauty</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <main class="app">
+        <header class="hud">
+            <h1>Calm Wiggle / Sane Staggering Beauty</h1>
+            <p>
+                Drag, flick, or shake the worm. Tune movement under Settings.
+                No flashing lights. No sounds.
+            </p>
+        </header>
+
+        <button id="settingsToggle" class="settings-toggle" type="button" aria-expanded="false"
+            aria-controls="settingsPanel" aria-label="Open movement settings">
+            <span class="settings-gear" aria-hidden="true">&#9881;</span>
+            <span>Settings</span>
+        </button>
+
+        <aside id="settingsPanel" class="settings-panel" aria-label="Worm movement tuning" hidden>
+            <div class="settings-header">
+                <h2>Tuning</h2>
+            </div>
+
+            <section class="controls">
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="presetSelect">Preset</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Preset help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Loads a tuned movement profile. Changing sliders switches to
+                                Custom.</span>
+                        </button>
+                    </div>
+                    <select id="presetSelect">
+                        <option value="custom">Custom</option>
+                        <option value="calm">Calm</option>
+                        <option value="heavy">Heavy</option>
+                        <option value="snappy">Snappy</option>
+                        <option value="stable">Stable</option>
+                    </select>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="stiffnessRange">Stiffness</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Stiffness help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">How strongly the head chases your pointer. Higher feels
+                                snappier.</span>
+                        </button>
+                    </div>
+                    <input id="stiffnessRange" type="range" min="0.1" max="0.35" step="0.01" />
+                    <output id="stiffnessValue" for="stiffnessRange"></output>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="dragRange">Drag</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Drag help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Velocity damping. Higher values feel steadier with less
+                                overshoot.</span>
+                        </button>
+                    </div>
+                    <input id="dragRange" type="range" min="0.75" max="0.95" step="0.01" />
+                    <output id="dragValue" for="dragRange"></output>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="gapRange">Segment Gap</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Segment gap help"
+                            aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Distance between body points. Larger gap gives broader
+                                bends.</span>
+                        </button>
+                    </div>
+                    <input id="gapRange" type="range" min="14" max="28" step="1" />
+                    <output id="gapValue" for="gapRange"></output>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="countRange">Length</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Length help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Number of simulated body points. Higher values make the worm
+                                longer.</span>
+                        </button>
+                    </div>
+                    <input id="countRange" type="range" min="34" max="72" step="1" />
+                    <output id="countValue" for="countRange"></output>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="passesRange">Stability</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Stability help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Constraint solve passes per frame. More passes reduce stretch
+                                artifacts.</span>
+                        </button>
+                    </div>
+                    <input id="passesRange" type="range" min="2" max="7" step="1" />
+                    <output id="passesValue" for="passesRange"></output>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="thicknessRange">Thickness</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Thickness help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Base body width when slow. Speed stretch is added on top.</span>
+                        </button>
+                    </div>
+                    <input id="thicknessRange" type="range" min="60" max="130" step="1" />
+                    <output id="thicknessValue" for="thicknessRange"></output>
+                </div>
+
+                <div class="control-row">
+                    <div class="label-with-tip">
+                        <label for="colorInput">Color</label>
+                        <button class="tooltip-trigger" type="button" aria-label="Color help" aria-expanded="false">
+                            i
+                            <span class="tooltip-text">Sets the worm body color.</span>
+                        </button>
+                    </div>
+                    <input id="colorInput" type="color" value="#2f7f68" />
+                    <output id="colorValue" for="colorInput">#2f7f68</output>
+                </div>
+
+                <button id="resetTune" type="button"
+                    title="Resets all tuning values back to the Calm preset.">Reset</button>
+            </section>
+        </aside>
+
+        <canvas id="stage" aria-label="Interactive calming worm animation"></canvas>
+
+        <a class="credit-link" href="https://staggeringbeauty.io" target="_blank" rel="noopener noreferrer">
+            ✨ Inspired by Staggering Beauty
+        </a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
